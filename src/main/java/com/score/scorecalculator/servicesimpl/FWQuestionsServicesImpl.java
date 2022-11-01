@@ -22,4 +22,9 @@ public class FWQuestionsServicesImpl implements FWQuestionsServices {
     public Optional<FWQuestions> getById(Long id) {
         return fwQuestionsRepo.findById(id);
     }
+
+    @Override
+    public Optional<FWQuestions> getByQuestionType(String type) {
+        return fwQuestionsRepo.findByQuestionType(type);
+    }
 }

@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Locale;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class FWQuestionsController {
     @Autowired
     FWQuestionsServices fwQuestionsServices;
@@ -25,6 +26,10 @@ public class FWQuestionsController {
     }
     @GetMapping(value = "/{id}")
     public FWQuestions getById(@PathVariable Long id){
-        return fwQuestionsServices.getById(id).orElseThrow(()-> new MyResourceNotFoundException(messageSource.getMessage("api.error.user.not.found", new Long[]{id}, Locale.ENGLISH)));
+        return fwQuestionsServices.getById(id).orElseThrow(()-> new MyResourceNotFoundException(messageSource.getMessage("api.error.user.not.found", new Long[]{id,id}, Locale.ENGLISH)));
+    }
+    @GetMapping(value = "/findByType")
+    public FWQuestions getByQuestionType(@RequestParam String type){
+        return fwQuestionsServices.getByQuestionType(type).orElseThrow(()-> new MyResourceNotFoundException(messageSource.getMessage("api.error.question.type.not.found", new String[]{type}, Locale.ENGLISH)));
     }
 }

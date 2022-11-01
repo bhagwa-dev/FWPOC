@@ -8,4 +8,6 @@ public interface FWQuestionsServices {
     FWQuestions add(FWQuestions fwQuestions);
 
     Optional<FWQuestions> getById(Long id);
+
+    Optional<FWQuestions> getByQuestionType(String type);
 }
